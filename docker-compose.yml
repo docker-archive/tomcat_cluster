@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  lb:
+    image: nginx
+    ports:
+      - '8080:80'
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - www
+  tomcat1:
+    image: tomcat-cluster
+    networks:
+      - www
+  tomcat2:
+    image: tomcat-cluster
+    networks:
+      - www
+  tomcat3:
+    image: tomcat-cluster
+    networks:
+      - www
+networks: 
+  www:
+    driver: bridge
